@@ -1,98 +1,147 @@
 Warehouse Retail System – Backend
-The Warehouse Retail System is a backend service for a warehouse distribution company that manages multiple retail stores. It provides internal admin users with tools to manage stores, products, inventory, customer orders, and product reviews. The system uses a relational database (MySQL) for core transactional data and a NoSQL database (MongoDB) for unstructured customer reviews.
+The Warehouse Retail System is a backend service for a warehouse distribution company that manages multiple retail stores. It provides internal admin users with tools to manage stores, products, inventory, customer orders, and product reviews.
 
-This project was built as a full backend implementation using Java, Spring Boot, and Hibernate, with an emphasis on clean architecture, clear domain modeling, and production-style practices.
+The system uses:
 
-1. Core features
-Store management:
+MySQL for core transactional data
 
-Create, update, list, and deactivate retail stores.
-Store metadata such as location, status, and identifiers.
-Product catalog management:
+MongoDB for unstructured customer reviews
 
-Manage the entire product catalog with categories, pricing, and activation status.
-Designed to support large catalogs across multiple stores.
-Inventory management:
+This project was built as a full backend implementation using Java, Spring Boot, and Hibernate, with an emphasis on clean architecture, clear domain modeling, and production‑style practices.
 
-Track inventory per store and product.
-View stock levels by store.
-Update stock levels and enforce constraints (e.g., cannot reduce below zero).
-Order placement:
+1. Core Features
+Store Management
+Create, update, list, and deactivate retail stores
 
-Place customer orders through internal tools (phone or in-store).
-Calculate totals, validate inventory, and update stock atomically.
-Associate orders with stores, customers, and line items.
-Customer management:
+Store metadata such as location, status, and identifiers
 
-Basic customer profiles for order tracking and analytics.
-Review system (NoSQL / MongoDB):
+Product Catalog Management
+Manage the entire product catalog with categories, pricing, and activation status
 
-Store product reviews as unstructured/semistructured data in MongoDB.
-Fetch reviews per product.
-Reporting via stored procedures (MySQL):
+Designed to support large catalogs across multiple stores
 
-Monthly sales per store.
-Aggregate company sales by month and year.
-Top-selling products by category.
-Error handling:
+Inventory Management
+Track inventory per store and product
 
-Global exception handling with standardized error responses for the frontend.
-2. Architecture overview
+View stock levels by store
+
+Update stock levels and enforce constraints (e.g., cannot reduce below zero)
+
+Order Placement
+Place customer orders through internal tools (phone or in‑store)
+
+Calculate totals, validate inventory, and update stock atomically
+
+Associate orders with stores, customers, and line items
+
+Customer Management
+Basic customer profiles for order tracking and analytics
+
+Review System (MongoDB / NoSQL)
+Store product reviews as unstructured or semi‑structured data
+
+Fetch reviews per product
+
+Reporting (MySQL Stored Procedures)
+Monthly sales per store
+
+Aggregate company sales by month and year
+
+Top‑selling products by category
+
+Error Handling
+Global exception handling
+
+Standardized error responses for the frontend
+
+2. Architecture Overview
 At a high level, the system is a layered Spring Boot application:
 
-Controller layer: Exposes REST APIs to the frontend, handles HTTP requests and responses.
-Service layer: Contains business logic, validations, and orchestration across repositories.
-Repository layer: Communicates with databases using Spring Data JPA (MySQL) and Spring Data MongoDB.
-Data layer: Contains JPA entities for structured SQL data and MongoDB documents for unstructured review data.
-The design follows common backend best practices:
+Controller Layer
+Exposes REST APIs to the frontend, handles HTTP requests and responses.
 
-Clear separation of concerns between layers.
-Domain-focused models (Store, Product, Inventory, Order, Customer, Review).
-Transactional integrity around order placement and inventory updates.
+Service Layer
+Contains business logic, validations, and orchestration across repositories.
 
-3. Tech stack
+Repository Layer
+Communicates with databases using:
+
+Spring Data JPA (MySQL)
+
+Spring Data MongoDB (MongoDB)
+
+Data Layer
+Contains:
+
+JPA entities for structured SQL data
+
+MongoDB documents for unstructured review data
+
+Backend Design Principles
+Clear separation of concerns
+
+Domain‑focused models (Store, Product, Inventory, Order, Customer, Review)
+
+Transactional integrity around order placement and inventory updates
+
+3. Tech Stack
 Language: Java (Spring Boot)
+
 Frameworks: Spring Boot, Spring Web, Spring Data JPA, Spring Data MongoDB, Hibernate
+
 Databases:
+
 MySQL (relational, transactional data)
+
 MongoDB (NoSQL, reviews)
-Build tool: Maven or Gradle (project uses one; see pom.xml or build.gradle)
-Documentation: README, inline JavaDoc and comments where logic is non-trivial
-Testing: JUnit and Spring Boot test support (for services and controllers)
-4. Domain model (business entities)
-4.1 SQL entities (MySQL via JPA/Hibernate)
-Store:
 
-Represents a physical or virtual retail location.
-Contains information such as name, code, address, and active status.
-Product:
+Build Tool: Maven or Gradle
 
-Represents items in the catalog.
-Includes SKU, name, category, description, price, and active status.
-Inventory:
+Documentation: README, JavaDoc
 
-Connects a Store and a Product with a quantity.
-Used to track how much of a product is available in each store.
-Customer:
+Testing: JUnit, Spring Boot Test
 
-Represents a customer placing orders through the internal system.
-Includes basic contact information.
-OrderDetails (Order header):
+4. Domain Model (Business Entities)
+4.1 SQL Entities (MySQL via JPA/Hibernate)
+Store
+Represents a physical or virtual retail location
 
-The main order record containing store, customer, date, status, and total amount.
-Connected to multiple OrderItem entries.
-OrderItem:
+Contains name, code, address, active status
 
-Represents line items for each OrderDetails.
-Includes product, quantity, unit price, and line total.
-4.2 NoSQL documents (MongoDB)
-Review:
-Stores customer reviews for products.
-Contains product reference, rating, comment, and timestamps.
-Uses MongoDB for flexibility in review structure and evolution over time.
+Product
+Represents items in the catalog
 
-5. Project structure
-A typical project structure (simplified) looks like this:
+Includes SKU, name, category, description, price, active status
+
+Inventory
+Connects a Store and a Product
+
+Tracks quantity available per store
+
+Customer
+Represents a customer placing orders
+
+Includes basic contact information
+
+OrderDetails (Order Header)
+Main order record
+
+Contains store, customer, date, status, total amount
+
+Connected to multiple OrderItem entries
+
+OrderItem
+Represents line items for each order
+
+Includes product, quantity, unit price, line total
+
+4.2 NoSQL Documents (MongoDB)
+Review
+Stores customer reviews for products
+
+Contains product reference, rating, comment, timestamps
+
+Uses MongoDB for flexible schema evolution
 src/main/java/com/example/warehouseretailsystem
 ├── controller
 │   ├── StoreController.java
@@ -136,5 +185,5 @@ src/main/java/com/example/warehouseretailsystem
 │   ├── InsufficientStockException.java
 │   └── other custom exceptions
 └── config
-    ├── DatabaseConfig.java (if needed)
-    └── MongoConfig.java (if needed)
+    ├── DatabaseConfig.java
+    └── MongoConfig.java
