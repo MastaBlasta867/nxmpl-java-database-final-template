@@ -49,6 +49,7 @@ The design follows common backend best practices:
 Clear separation of concerns between layers.
 Domain-focused models (Store, Product, Inventory, Order, Customer, Review).
 Transactional integrity around order placement and inventory updates.
+
 3. Tech stack
 Language: Java (Spring Boot)
 Frameworks: Spring Boot, Spring Web, Spring Data JPA, Spring Data MongoDB, Hibernate
@@ -89,9 +90,9 @@ Review:
 Stores customer reviews for products.
 Contains product reference, rating, comment, and timestamps.
 Uses MongoDB for flexibility in review structure and evolution over time.
+
 5. Project structure
 A typical project structure (simplified) looks like this:
-
 src/main/java/com/example/warehouseretailsystem
 ├── controller
 │   ├── StoreController.java
@@ -137,48 +138,3 @@ src/main/java/com/example/warehouseretailsystem
 └── config
     ├── DatabaseConfig.java (if needed)
     └── MongoConfig.java (if needed)
-About
-Capstone Java database project implementing CRUD operations, JDBC, SQL, and best practices using the IBM Skills Network template.
-
-Resources
- Readme
-License
- Apache-2.0 license
- Activity
-Stars
- 0 stars
-Watchers
- 0 watching
-Forks
- 0 forks
-Releases
-No releases published
-Create a new release
-Packages
-No packages published
-Publish your first package
-Languages
-Java
-36.6%
- 
-HTML
-32.2%
- 
-JavaScript
-24.9%
- 
-CSS
-6.3%
-Suggested workflows
-Based on your tech stack
-Webpack logo
-Webpack
-Build a NodeJS project with npm and webpack.
-Publish Java Package with Gradle logo
-Publish Java Package with Gradle
-Build a Java Package using Gradle and publish to GitHub Packages.
-Deno logo
-Deno
-Test your Deno project
-More workflows
-Footer
